@@ -2,7 +2,6 @@ import * as PIXI from 'pixi.js'
 import backgroundImage from './images/background2.png'
 import spriteImage from './images/sprite1.png'
 import { Player } from './player';
-import { Ship } from './ship';
 
 // Game
 
@@ -43,11 +42,11 @@ export class Game {
         this.player = new Player(this.loader.resources["playerTexture"].texture!)
         this.pixi.stage.addChild(this.player)
 
-        this.pixi.ticker.add((delta)=> this.update(delta));
+        this.pixi.ticker.add((delta)=> this.update(delta)); 
 }
 
 update(delta: number){
-    this.player.update(delta);
+    
     }
 }
 

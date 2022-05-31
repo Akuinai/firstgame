@@ -556,9 +556,7 @@ class Game {
         this.pixi.ticker.add((delta)=>this.update(delta)
         );
     }
-    update(delta) {
-        this.player.update(delta);
-    }
+    update(delta) {}
 }
 new Game();
 
@@ -37106,15 +37104,51 @@ parcelHelpers.export(exports, "Player", ()=>Player
 );
 var _pixiJs = require("pixi.js");
 class Player extends _pixiJs.Sprite {
+    speed = 10;
     constructor(texture){
         super(texture);
+        window.addEventListener("keydown", (e)=>this.onKeyDown(e)
+        );
+        window.addEventListener("keyup", (e)=>this.onKeyUp(e)
+        );
         this.anchor.set(0.5);
         let elapsed = 0;
-        this.x = 200 + Math.cos(elapsed / 100) * 350;
+        this.x = 200 + Math.cos(elapsed / 150) * 350;
         this.y = 485;
     }
-    update(delta) {
-        this.x += delta;
+    onKeyDown(e) {
+        switch(e.key.toUpperCase()){
+            case " ":
+                break;
+            case "A":
+            case "ARROWLEFT":
+                this.x -= this.speed;
+                console.log('Goes left');
+                break;
+            case "D":
+            case "ARROWRIGHT":
+                this.x += this.speed;
+                console.log('Goes right');
+                break;
+        }
+    }
+    onKeyUp(e) {
+    // switch (e.key.toUpperCase()) {
+    //     case " ":
+    //         break;
+    //     case "A":
+    //     case "D":
+    //     case "ARROWLEFT":
+    //     case "ARROWRIGHT":
+    //         this.speed = 0
+    //         break
+    // case "W":
+    // case "S":
+    // case "ARROWUP":
+    // case "ARROWDOWN":
+    //     this.speed = 0
+    //     break
+    // }
     }
 }
 
