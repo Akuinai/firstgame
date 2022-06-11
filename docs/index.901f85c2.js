@@ -529,6 +529,7 @@ class Game {
     // Canvas game
     pixiWidth = 1420;
     pixiHeight = 770;
+    playerTextures = [];
     // Constructor
     // Loading assets
     constructor(){
@@ -542,6 +543,9 @@ class Game {
         this.loader = new _pixiJs.Loader();
         this.loader.add('backgroundTexture', _background2PngDefault.default).add('playerTexture', _sprite1PngDefault.default);
         this.loader.load(()=>this.loadCompleted()
+        );
+        this.pixi.loader.add("spritesheet", "spritesheet.json");
+        this.pixi.loader.load(()=>this.loadCompleted()
         );
     }
     loadCompleted() {
@@ -37133,6 +37137,7 @@ class Player extends _pixiJs.Sprite {
         }
     }
     onKeyUp(e) {
+    // Vraag Leanne waarom ik deze leeg moet houden
     // switch (e.key.toUpperCase()) {
     //     case " ":
     //         break;

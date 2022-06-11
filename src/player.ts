@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import { Game } from './game'
+import { Game } from './game.js'
 
 export class Player extends PIXI.Sprite{
 private speed = 10;
@@ -18,10 +18,9 @@ constructor(texture: PIXI.Texture){
     this.y = 485;
     }
 
-    onKeyDown(e: KeyboardEvent): void {
+   private  onKeyDown(e: KeyboardEvent): void {
         switch (e.key.toUpperCase()) {
             case " ":
-                // this.shoot()
                 break;
             case "A":
             case "ARROWLEFT":
@@ -37,6 +36,7 @@ constructor(texture: PIXI.Texture){
     }
 
     private onKeyUp(e: KeyboardEvent): void {
+        // Vraag Leanne waarom ik deze leeg moet houden
         // switch (e.key.toUpperCase()) {
         //     case " ":
         //         break;
