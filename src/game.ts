@@ -1,30 +1,32 @@
 import * as PIXI from 'pixi.js'
-import backgroundImage from './images/background2.png'
-import spriteImage from './images/sprite1.png'
+import { App } from './app'
 import { Player } from './player';
 import { Assets } from './assets';
+import backgroundImage from './images/background2.png'
+import spriteImage from './images/sprite1.png'
 
 // Game
 
 export class Game {
 
 // Canvas game
-    private pixiWidth =  1420;
-    private pixiHeight =  770;
+    // private pixiWidth =  800;
+    // private pixiHeight =  600;
 
 // Globals
 
     private  pixi:   PIXI.Application
     private  loader: PIXI.Loader
-    public   player: Player
-    public   playerTextures: PIXI.Texture[] = [];
+    private  player: Player
+    private   playerTextures: PIXI.Texture[] = [];
     
 // Constructor
 // Loading assets
 
     constructor(){
 
-        this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight });
+        // this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight });
+        this.pixi = new PIXI.Application({ width: 800, height: 600 });
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
@@ -33,16 +35,15 @@ export class Game {
         this.loader.add('backgroundTexture', backgroundImage)
                    .add('playerTexture', spriteImage);
         this.loader.load(()=>this.loadCompleted());
-
-        this.pixi.loader.add("spritesheet", "spritesheet.json");
-        this.pixi.loader.load(() => this.loadCompleted());
     }
-    loadCompleted() {
-        // Adding background
+    private loadCompleted(): void {
+        // Loading background
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
-        background.height = this.pixiHeight;
-        background.width = this.pixiWidth;
 
+        // background.height = this.pixiHeight;
+        // background.width = this.pixiWidth;
+
+        // Adding background
         this.pixi.stage.addChild(background);
 
         // Adding player

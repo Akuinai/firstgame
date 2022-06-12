@@ -1,57 +1,66 @@
-// import * as PIXI from 'pixi.js'
-// import { Game } from './game.ts'
-// import backgroundImage from './images/background2.png'
-// import logoImage from './images/startscreenlogo.png'
+import * as PIXI from 'pixi.js'
+import { Game } from './game'
+import backgroundImage from './images/background2.png'
+import logoImage from './images/startscreenlogo.png'
+import { startScreenLogo } from './startScreenLogo'
 
+// App (Start screen)
 
-// export class App{
-// // Canvas game
-// private pixiWidth =  1420;
-// private pixiHeight =  770;
+export class App{
 
-// // Globals
+// Canvas game
+// private pixiWidth =  800;
+// private pixiHeight =  600;
 
-// private pixi:   PIXI.Application
-// private loader: PIXI.Loader
-// private playerTextures: PIXI.Texture[] = [];
+// Globals
 
+private pixi:   PIXI.Application
+private loader: PIXI.Loader
+private logo: startScreenLogo
+private playerTextures: PIXI.Texture[] = [];
 
-// // Costructor
-// // Loading assets
+// Costructor
+// Loading assets
 
-//     constructor(){
+    constructor(){
 
-//         this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight });
-//         this.pixi.stage.interactive = true;
-//         this.pixi.stage.hitArea = this.pixi.renderer.screen;
-//         document.body.appendChild(this.pixi.view);
+        // this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight });
+        this.pixi = new PIXI.Application({ width: 800, height: 600 });
+        this.pixi.stage.interactive = true;
+        this.pixi.stage.hitArea = this.pixi.renderer.screen;
+        document.body.appendChild(this.pixi.view);
 
-//         this.loader = new PIXI.Loader();
-//             this.loader.add('backgroundTexture', backgroundImage)
-//                        .add('logoTexture', logoImage);
-//         this.loader.load(()=>this.loadCompleted());
-//     }
-//         loadCompleted(): void {
-//             // Adding background & logo
-//         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
-//         let logo = new PIXI.Sprite(this.loader.resources["logoTexture"].texture!);
-//         background.height = this.pixiHeight;
-//         background.width = this.pixiWidth;
+        this.loader = new PIXI.Loader();
+        this.loader.add('backgroundTexture', backgroundImage)
+                    .add('logoTexture', logoImage);
+        this.loader.load(()=>this.loadCompleted());
+    }
+      private loadCompleted(): void {
+        // Loading background
+        let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         
-//         this.pixi.stage.addChild(background);
-//         this.pixi.stage.addChild(logo);
+        // background.height = this.pixiHeight;
+        // background.width = this.pixiWidth;
 
-//         logo.interactive = true;
-//         logo.buttonMode = true;
-//         logo.on('pointerdown', () => this.onClick());
-//     }
+        // Adding background
+         this.pixi.stage.addChild(background);
+        
+        // Adding logo
+        this.logo = new startScreenLogo(this.loader.resources["logoTexture"].texture!)
+        this.pixi.stage.addChild(this.logo);
 
-//     onClick() {
-//         console.log('klik');
-//         window.location.href="game.html";
-//         //  document.getElementsByTagName('canvas')[0].remove();
-//         // new Game();
-//     }
-// }
+        this.logo.interactive = true;
+        this.logo.buttonMode = true;
+        this.logo.on('pointerdown', () => this.onClick());
+    }
 
-// new App();
+    onClick() {
+        console.log('click');
+        window.location.href="game.html";
+        // window.location.href="game.html";
+        //  document.getElementsByTagName('canvas')[0].remove();
+        // new Game();
+    }
+}
+
+new App();
