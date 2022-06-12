@@ -1,3 +1,3 @@
 # Jumping Jack
 
-A + D controls are now working 'properly'. Which means not as smooth as I want it to go but it works!
+The game now has a startscreen which sends you to the game. Here you can use A + D keyboard controls to move Jack.
