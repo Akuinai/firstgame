@@ -14,8 +14,8 @@ constructor(texture: PIXI.Texture){
 
     let elapsed = 0.0;
 
-    this.x = 200 + Math.cos(elapsed/150.0) * 350.0;
-    this.y = 485;
+    this.x = 50 + Math.cos(elapsed/150.0) * 350.0;
+    this.y = 368;
     }
 
    private  onKeyDown(e: KeyboardEvent): void {

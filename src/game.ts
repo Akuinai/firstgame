@@ -4,6 +4,7 @@ import { Player } from './player';
 import { Assets } from './assets';
 import backgroundImage from './images/background2.png'
 import spriteImage from './images/sprite1.png'
+import overallMusic from 'url:./music/jackmenumusic.mp3'
 
 // Game
 
@@ -33,12 +34,15 @@ export class Game {
 
         this.loader = new PIXI.Loader();
         this.loader.add('backgroundTexture', backgroundImage)
-                   .add('playerTexture', spriteImage);
+                   .add('playerTexture', spriteImage)
+                   .add('menuMusic', overallMusic)
         this.loader.load(()=>this.loadCompleted());
     }
     private loadCompleted(): void {
         // Loading background
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
+        let playMusic = this.loader.resources["menuMusic"].data!
+        playMusic.play()
 
         // background.height = this.pixiHeight;
         // background.width = this.pixiWidth;
