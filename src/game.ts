@@ -1,10 +1,13 @@
 import * as PIXI from 'pixi.js'
 import { App } from './app'
 import { Player } from './player';
+import { Bird } from './enemy';
 import { Assets } from './assets';
 import backgroundImage from './images/background2.png'
 import spriteImage from './images/sprite1.png'
+import spriteBird from './images/enemysprite1.png'
 import overallMusic from 'url:./music/jackmenumusic.mp3'
+
 
 // Game
 
@@ -19,7 +22,8 @@ export class Game {
     private  pixi:   PIXI.Application
     private  loader: PIXI.Loader
     private  player: Player
-    private   playerTextures: PIXI.Texture[] = [];
+    private enemy: Bird
+    private  playerTextures: PIXI.Texture[] = [];
     
 // Constructor
 // Loading assets
@@ -36,23 +40,30 @@ export class Game {
         this.loader.add('backgroundTexture', backgroundImage)
                    .add('playerTexture', spriteImage)
                    .add('menuMusic', overallMusic)
+                   .add('birdTexture', spriteBird)
+                   
         this.loader.load(()=>this.loadCompleted());
     }
     private loadCompleted(): void {
         // Loading background
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
+        // Adding background
+        this.pixi.stage.addChild(background);
+
+        // Loading and playing music
         let playMusic = this.loader.resources["menuMusic"].data!
         playMusic.play()
 
         // background.height = this.pixiHeight;
         // background.width = this.pixiWidth;
 
-        // Adding background
-        this.pixi.stage.addChild(background);
-
-        // Adding player
-        this.player = new Player(this.loader.resources["playerTexture"].texture!)
+        // Adding & loading player
+        this.player = new Player(this.loader.resources["playerTexture"].texture!);
         this.pixi.stage.addChild(this.player)
+
+        // Adding & loading enemy Bird
+        this.enemy = new Bird(this.loader.resources["birdTexture"].texture!);
+        this.pixi.stage.addChild(this.enemy)
 
         this.pixi.ticker.add((delta)=> this.update(delta)); 
 }
