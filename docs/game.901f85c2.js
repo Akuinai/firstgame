@@ -528,6 +528,8 @@ var _sprite1Png = require("./images/sprite1.png");
 var _sprite1PngDefault = parcelHelpers.interopDefault(_sprite1Png);
 var _enemysprite1Png = require("./images/enemysprite1.png");
 var _enemysprite1PngDefault = parcelHelpers.interopDefault(_enemysprite1Png);
+var _enemysprite2Png = require("./images/enemysprite2.png");
+var _enemysprite2PngDefault = parcelHelpers.interopDefault(_enemysprite2Png);
 var _jackmenumusicMp3 = require("url:./music/jackmenumusic.mp3");
 var _jackmenumusicMp3Default = parcelHelpers.interopDefault(_jackmenumusicMp3);
 class Game {
@@ -544,34 +546,42 @@ class Game {
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
         this.loader = new _pixiJs.Loader();
-        this.loader.add('backgroundTexture', _background2PngDefault.default).add('playerTexture', _sprite1PngDefault.default).add('menuMusic', _jackmenumusicMp3Default.default).add('birdTexture', _enemysprite1PngDefault.default);
+        this.loader.add('backgroundTexture', _background2PngDefault.default).add('playerTexture', _sprite1PngDefault.default).add('menuMusic', _jackmenumusicMp3Default.default).add('birdTexture', _enemysprite1PngDefault.default).add('birdTexture2', _enemysprite2PngDefault.default);
         this.loader.load(()=>this.loadCompleted()
         );
     }
     loadCompleted() {
+        console.log("yoooo");
         // Loading background
         let background = new _pixiJs.Sprite(this.loader.resources["backgroundTexture"].texture);
         // Adding background
         this.pixi.stage.addChild(background);
         // Loading and playing music
         let playMusic = this.loader.resources["menuMusic"].data;
-        playMusic.play();
+        // playMusic.play()
         // background.height = this.pixiHeight;
         // background.width = this.pixiWidth;
         // Adding & loading player
         this.player = new _player.Player(this.loader.resources["playerTexture"].texture);
         this.pixi.stage.addChild(this.player);
         // Adding & loading enemy Bird
-        this.enemy = new _enemy.Bird(this.loader.resources["birdTexture"].texture);
+        this.enemy = new _enemy.Bird(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
         this.pixi.stage.addChild(this.enemy);
+        // Adding & loading enemy Bird
+        this.enemytwo = new _enemy.Bird(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
+        this.pixi.stage.addChild(this.enemytwo);
         this.pixi.ticker.add((delta)=>this.update(delta)
         );
     }
-    update(delta) {}
+    update(delta) {
+        //this.player.update()
+        this.enemy.update();
+        this.enemytwo.update();
+    }
 }
 new Game();
 
-},{"pixi.js":"dsYej","./images/background2.png":"cuA7W","./images/sprite1.png":"5z7Gk","./player":"6OTSH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:./music/jackmenumusic.mp3":"bl9QX","./enemy":"e8Rej","./images/enemysprite1.png":"1MvSD"}],"dsYej":[function(require,module,exports) {
+},{"pixi.js":"dsYej","./player":"6OTSH","./enemy":"e8Rej","./images/background2.png":"cuA7W","./images/sprite1.png":"5z7Gk","./images/enemysprite1.png":"1MvSD","url:./music/jackmenumusic.mp3":"bl9QX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./images/enemysprite2.png":"8Z8yk"}],"dsYej":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "utils", ()=>_utils
@@ -37068,47 +37078,7 @@ function __extends(d, b) {
     return AnimatedSprite1;
 }(_sprite.Sprite);
 
-},{"@pixi/core":"7PEF8","@pixi/sprite":"9mbxh","@pixi/ticker":"8ekG7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cuA7W":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "background2.38e27620.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"5z7Gk":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "sprite1.063de665.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"6OTSH":[function(require,module,exports) {
+},{"@pixi/core":"7PEF8","@pixi/sprite":"9mbxh","@pixi/ticker":"8ekG7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6OTSH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Player", ()=>Player
@@ -37164,10 +37134,7 @@ class Player extends _pixiJs.Sprite {
     }
 }
 
-},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bl9QX":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "jackmenumusic.1b1fab94.mp3" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"e8Rej":[function(require,module,exports) {
+},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8Rej":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Bird", ()=>Bird
@@ -37175,17 +37142,72 @@ parcelHelpers.export(exports, "Bird", ()=>Bird
 var _pixiJs = require("pixi.js");
 class Bird extends _pixiJs.Sprite {
     speed = 10;
-    constructor(texture){
+    constructor(texture, textureTwo){
         super(texture);
+        this.textureOne = texture;
+        this.textureTwo = textureTwo;
+        this.scale.set(-1, 1);
         this.anchor.set(0.5);
         let elapsed = 0;
-        this.x = 80 + Math.cos(elapsed / 150) * 350;
-        this.y = 368;
+        this.x = 80;
+        this.y = Math.random() * 400;
+    }
+    update() {
+        this.x += 2;
+        if (this.x > 1000) this.x = -200;
+        if (this.x % 40 == 0) this.texture = this.textureTwo;
+        else if (this.x % 20 == 0) this.texture = this.textureOne;
     }
 }
 
-},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1MvSD":[function(require,module,exports) {
+},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cuA7W":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "background2.38e27620.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"5z7Gk":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "sprite1.063de665.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"1MvSD":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "enemysprite1.309f869e.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"bl9QX":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "jackmenumusic.1b1fab94.mp3" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"8Z8yk":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "enemysprite2.82de2a83.png" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}]},["fpRtI","edeGs"], "edeGs", "parcelRequirea0e5")
 

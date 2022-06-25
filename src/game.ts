@@ -6,6 +6,7 @@ import { Assets } from './assets';
 import backgroundImage from './images/background2.png'
 import spriteImage from './images/sprite1.png'
 import spriteBird from './images/enemysprite1.png'
+import spriteBird2 from './images/enemysprite2.png'
 import overallMusic from 'url:./music/jackmenumusic.mp3'
 
 
@@ -23,6 +24,7 @@ export class Game {
     private  loader: PIXI.Loader
     private  player: Player
     private enemy: Bird
+    private enemytwo : Bird
     private  playerTextures: PIXI.Texture[] = [];
     
 // Constructor
@@ -41,10 +43,12 @@ export class Game {
                    .add('playerTexture', spriteImage)
                    .add('menuMusic', overallMusic)
                    .add('birdTexture', spriteBird)
+                   .add('birdTexture2', spriteBird2)
                    
         this.loader.load(()=>this.loadCompleted());
     }
     private loadCompleted(): void {
+        console.log("yoooo")
         // Loading background
         let background = new PIXI.Sprite(this.loader.resources["backgroundTexture"].texture!);
         // Adding background
@@ -52,7 +56,7 @@ export class Game {
 
         // Loading and playing music
         let playMusic = this.loader.resources["menuMusic"].data!
-        playMusic.play()
+        // playMusic.play()
 
         // background.height = this.pixiHeight;
         // background.width = this.pixiWidth;
@@ -62,14 +66,21 @@ export class Game {
         this.pixi.stage.addChild(this.player)
 
         // Adding & loading enemy Bird
-        this.enemy = new Bird(this.loader.resources["birdTexture"].texture!);
+        this.enemy = new Bird(this.loader.resources["birdTexture"].texture!, this.loader.resources["birdTexture2"].texture!);
         this.pixi.stage.addChild(this.enemy)
+
+         // Adding & loading enemy Bird
+         this.enemytwo = new Bird(this.loader.resources["birdTexture"].texture!, this.loader.resources["birdTexture2"].texture!);
+         this.pixi.stage.addChild(this.enemytwo)
 
         this.pixi.ticker.add((delta)=> this.update(delta)); 
 }
 
 update(delta: number){
-    
+        //this.player.update()
+        this.enemy.update()
+
+        this.enemytwo.update()
     }
 }
 
