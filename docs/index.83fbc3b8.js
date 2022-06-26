@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"fpRtI":[function(require,module,exports) {
+})({"kxpx9":[function(require,module,exports) {
 "use strict";
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "a7523702901f85c2";
+module.bundle.HMR_BUNDLE_ID = "07d86a3e83fbc3b8";
 function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -513,29 +513,21 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"edeGs":[function(require,module,exports) {
+},{}],"kuM8f":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-// Game
-parcelHelpers.export(exports, "Game", ()=>Game
+// App (Start screen)
+parcelHelpers.export(exports, "App", ()=>App
 );
 var _pixiJs = require("pixi.js");
-var _player = require("./player");
-var _enemy = require("./enemy");
-var _enemyr = require("./enemyr");
 var _background2Png = require("./images/background2.png");
 var _background2PngDefault = parcelHelpers.interopDefault(_background2Png);
-var _sprite1Png = require("./images/sprite1.png");
-var _sprite1PngDefault = parcelHelpers.interopDefault(_sprite1Png);
-var _enemysprite1Png = require("./images/enemysprite1.png");
-var _enemysprite1PngDefault = parcelHelpers.interopDefault(_enemysprite1Png);
-var _enemysprite2Png = require("./images/enemysprite2.png");
-var _enemysprite2PngDefault = parcelHelpers.interopDefault(_enemysprite2Png);
-var _jackmenumusicMp3 = require("url:./music/jackmenumusic.mp3");
-var _jackmenumusicMp3Default = parcelHelpers.interopDefault(_jackmenumusicMp3);
-class Game {
+var _startscreenlogoPng = require("./images/startscreenlogo.png");
+var _startscreenlogoPngDefault = parcelHelpers.interopDefault(_startscreenlogoPng);
+var _startScreenLogo = require("./startScreenLogo");
+class App {
     playerTextures = [];
-    // Constructor
+    // Costructor
     // Loading assets
     constructor(){
         // this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight });
@@ -547,53 +539,36 @@ class Game {
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
         this.loader = new _pixiJs.Loader();
-        this.loader.add('backgroundTexture', _background2PngDefault.default).add('playerTexture', _sprite1PngDefault.default).add('menuMusic', _jackmenumusicMp3Default.default).add('birdTexture', _enemysprite1PngDefault.default).add('birdTexture2', _enemysprite2PngDefault.default);
+        this.loader.add('backgroundTexture', _background2PngDefault.default).add('logoTexture', _startscreenlogoPngDefault.default);
         this.loader.load(()=>this.loadCompleted()
         );
     }
     loadCompleted() {
         // Loading background
         let background = new _pixiJs.Sprite(this.loader.resources["backgroundTexture"].texture);
+        // background.height = this.pixiHeight;
+        // background.width = this.pixiWidth;
         // Adding background
         this.pixi.stage.addChild(background);
-        // Loading and playing music
-        let playMusic = this.loader.resources["menuMusic"].data;
-        // playMusic.play()
-        // Adding & loading player
-        this.player = new _player.Player(this.loader.resources["playerTexture"].texture);
-        this.pixi.stage.addChild(this.player);
-        // Adding & loading enemy Bird (left)
-        this.enemy = new _enemy.Bird(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
-        this.pixi.stage.addChild(this.enemy);
-        // Adding & loading enemy Bird (left)
-        this.enemytwo = new _enemy.Bird(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
-        this.pixi.stage.addChild(this.enemytwo);
-        // Adding & loading enemy Bird (right)
-        this.enemyr = new _enemyr.BirdTwo(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
-        this.pixi.stage.addChild(this.enemyr);
-        // Adding & loading enemy Bird (right)
-        this.enemyrtwo = new _enemyr.BirdTwo(this.loader.resources["birdTexture"].texture, this.loader.resources["birdTexture2"].texture);
-        this.pixi.stage.addChild(this.enemyrtwo);
-        this.pixi.ticker.add((delta)=>this.update(delta)
+        // Adding logo
+        this.logo = new _startScreenLogo.startScreenLogo(this.loader.resources["logoTexture"].texture);
+        this.pixi.stage.addChild(this.logo);
+        this.logo.interactive = true;
+        this.logo.buttonMode = true;
+        this.logo.on('pointerdown', ()=>this.onClick()
         );
     }
-    update(delta) {
-        //this.player.update()
-        this.enemy.update();
-        this.enemytwo.update();
-        this.enemyr.update();
-        this.enemyrtwo.update();
-        if (this.collision(this.enemy, this.player)) console.log("Player touches bird");
-    }
-    collision(sprite1, sprite2) {
-        const bounds1 = sprite1.getBounds();
-        const bounds2 = sprite2.getBounds();
-        return bounds1.x < bounds2.x + bounds2.width && bounds1.x + bounds1.width > bounds2.x && bounds1.y < bounds2.y + bounds2.height && bounds1.y + bounds1.height > bounds2.y;
+    onClick() {
+        console.log('click');
+        window.location.href = "game.html";
+    // // window.location.href="game.html";
+    //  document.getElementsByTagName('canvas')[0].remove();
+    // new Game();
     }
 }
-new Game();
+new App();
 
-},{"pixi.js":"dsYej","./player":"6OTSH","./enemy":"e8Rej","./enemyr":"gLNae","./images/background2.png":"cuA7W","./images/sprite1.png":"5z7Gk","./images/enemysprite1.png":"1MvSD","./images/enemysprite2.png":"8Z8yk","url:./music/jackmenumusic.mp3":"bl9QX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dsYej":[function(require,module,exports) {
+},{"pixi.js":"dsYej","./images/background2.png":"c1vdL","./images/startscreenlogo.png":"6N7ga","./startScreenLogo":"3mOwS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dsYej":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "utils", ()=>_utils
@@ -37090,116 +37065,8 @@ function __extends(d, b) {
     return AnimatedSprite1;
 }(_sprite.Sprite);
 
-},{"@pixi/core":"7PEF8","@pixi/sprite":"9mbxh","@pixi/ticker":"8ekG7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6OTSH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Player", ()=>Player
-);
-var _pixiJs = require("pixi.js");
-class Player extends _pixiJs.Sprite {
-    speed = 10;
-    constructor(texture){
-        super(texture);
-        window.addEventListener("keydown", (e)=>this.onKeyDown(e)
-        );
-        window.addEventListener("keyup", (e)=>this.onKeyUp(e)
-        );
-        this.anchor.set(0.5);
-        let elapsed = 0;
-        this.x = 50 + Math.cos(elapsed / 150) * 350;
-        this.y = 368;
-    }
-    onKeyDown(e) {
-        switch(e.key.toUpperCase()){
-            case " ":
-                break;
-            case "A":
-            case "ARROWLEFT":
-                this.x -= this.speed;
-                console.log('Goes left');
-                break;
-            case "D":
-            case "ARROWRIGHT":
-                this.x += this.speed;
-                console.log('Goes right');
-                break;
-        }
-    }
-    onKeyUp(e) {
-    // Vraag Leanne waarom ik deze leeg moet houden
-    // switch (e.key.toUpperCase()) {
-    //     case " ":
-    //         break;
-    //     case "A":
-    //     case "D":
-    //     case "ARROWLEFT":
-    //     case "ARROWRIGHT":
-    //         this.speed = 0
-    //         break
-    // case "W":
-    // case "S":
-    // case "ARROWUP":
-    // case "ARROWDOWN":
-    //     this.speed = 0
-    //     break
-    // }
-    }
-}
-
-},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8Rej":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Bird", ()=>Bird
-);
-var _pixiJs = require("pixi.js");
-class Bird extends _pixiJs.Sprite {
-    speed = 10;
-    constructor(texture, textureTwo){
-        super(texture);
-        this.pivot.set(0.5);
-        this.textureOne = texture;
-        this.textureTwo = textureTwo;
-        this.scale.set(-1, 1);
-        this.anchor.set(-0.5);
-        let elapsed = 0;
-        this.x = 80;
-        this.y = Math.random() * 400;
-    }
-    update() {
-        this.x += 2;
-        if (this.x > 1000) this.x = -200;
-        if (this.x % 40 == 0) this.texture = this.textureTwo;
-        else if (this.x % 20 == 0) this.texture = this.textureOne;
-    }
-}
-
-},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gLNae":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "BirdTwo", ()=>BirdTwo
-);
-var _pixiJs = require("pixi.js");
-class BirdTwo extends _pixiJs.Sprite {
-    speed = 10;
-    constructor(texture, textureTwo){
-        super(texture);
-        this.textureOne = texture;
-        this.textureTwo = textureTwo;
-        this.anchor.set(0);
-        // let elapsed = 0.0;
-        // this.x = 80;
-        this.y = Math.random() * 400;
-    }
-    update() {
-        this.x -= 2;
-        if (this.x < -200) this.x = 1000;
-        if (this.x % 40 == 0) this.texture = this.textureTwo;
-        else if (this.x % 20 == 0) this.texture = this.textureOne;
-    }
-}
-
-},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cuA7W":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "background2.38e27620.png" + "?" + Date.now();
+},{"@pixi/core":"7PEF8","@pixi/sprite":"9mbxh","@pixi/ticker":"8ekG7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c1vdL":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('FLaer') + "background2.38e27620.png" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";
@@ -37235,18 +37102,26 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"5z7Gk":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "sprite1.063de665.png" + "?" + Date.now();
+},{}],"6N7ga":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('FLaer') + "startscreenlogo.063d7ae1.png" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"1MvSD":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "enemysprite1.309f869e.png" + "?" + Date.now();
+},{"./helpers/bundle-url":"lgJ39"}],"3mOwS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "startScreenLogo", ()=>startScreenLogo
+);
+var _pixiJs = require("pixi.js");
+class startScreenLogo extends _pixiJs.Sprite {
+    speed = 10;
+    constructor(texture){
+        super(texture);
+        this.anchor.set(0.5);
+        let elapsed = 0;
+        this.x = 65 + Math.cos(elapsed / 150) * 350;
+        this.y = 250;
+    }
+}
 
-},{"./helpers/bundle-url":"lgJ39"}],"8Z8yk":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "enemysprite2.82de2a83.png" + "?" + Date.now();
+},{"pixi.js":"dsYej","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["kxpx9","kuM8f"], "kuM8f", "parcelRequirea0e5")
 
-},{"./helpers/bundle-url":"lgJ39"}],"bl9QX":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('emE5o') + "jackmenumusic.1b1fab94.mp3" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}]},["fpRtI","edeGs"], "edeGs", "parcelRequirea0e5")
-
-//# sourceMappingURL=game.901f85c2.js.map
+//# sourceMappingURL=index.83fbc3b8.js.map

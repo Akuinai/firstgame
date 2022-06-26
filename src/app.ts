@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
-import { Game } from './game'
-import gameLink from "./game.html"
+import { Game } from "./game"
+import link from "./game.html"
 import backgroundImage from './images/background2.png'
 import logoImage from './images/startscreenlogo.png'
 import { startScreenLogo } from './startScreenLogo'
@@ -57,8 +57,8 @@ private playerTextures: PIXI.Texture[] = [];
 
     onClick() {
         console.log('click');
-        window.location.href=gameLink
-        // window.location.href="game.html";
+        window.location.href = "game.html";
+        // // window.location.href="game.html";
         //  document.getElementsByTagName('canvas')[0].remove();
         // new Game();
     }
