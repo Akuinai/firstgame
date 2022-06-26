@@ -583,6 +583,7 @@ class Game {
         this.enemytwo.update();
         this.enemyr.update();
         this.enemyrtwo.update();
+        // Collision detection throughout console log
         if (this.collision(this.enemy, this.player)) console.log("Player touches bird");
     }
     collision(sprite1, sprite2) {
@@ -37109,6 +37110,7 @@ class Player extends _pixiJs.Sprite {
         this.x = 50 + Math.cos(elapsed / 150) * 350;
         this.y = 368;
     }
+    // Keyboard 
     onKeyDown(e) {
         switch(e.key.toUpperCase()){
             case " ":
@@ -37126,7 +37128,6 @@ class Player extends _pixiJs.Sprite {
         }
     }
     onKeyUp(e) {
-    // Vraag Leanne waarom ik deze leeg moet houden
     // switch (e.key.toUpperCase()) {
     //     case " ":
     //         break;
@@ -37166,8 +37167,11 @@ class Bird extends _pixiJs.Sprite {
         this.y = Math.random() * 400;
     }
     update() {
+        // Creating speed
         this.x += 2;
+        // If 'x' has a certain position, send bird beginning position 
         if (this.x > 1000) this.x = -200;
+        // Swapping textures
         if (this.x % 40 == 0) this.texture = this.textureTwo;
         else if (this.x % 20 == 0) this.texture = this.textureOne;
     }
@@ -37191,8 +37195,11 @@ class BirdTwo extends _pixiJs.Sprite {
         this.y = Math.random() * 400;
     }
     update() {
+        // Creating speed 
         this.x -= 2;
+        // If 'x' has a certain position, send bird beginning position 
         if (this.x < -200) this.x = 1000;
+        // Swapping textures
         if (this.x % 40 == 0) this.texture = this.textureTwo;
         else if (this.x % 20 == 0) this.texture = this.textureOne;
     }

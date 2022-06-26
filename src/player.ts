@@ -18,6 +18,7 @@ constructor(texture: PIXI.Texture){
     this.y = 368;
     }
 
+    // Keyboard 
    private  onKeyDown(e: KeyboardEvent): void {
         switch (e.key.toUpperCase()) {
             case " ":
@@ -36,7 +37,6 @@ constructor(texture: PIXI.Texture){
     }
 
     private onKeyUp(e: KeyboardEvent): void {
-        // Vraag Leanne waarom ik deze leeg moet houden
         // switch (e.key.toUpperCase()) {
         //     case " ":
         //         break;

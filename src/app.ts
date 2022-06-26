@@ -55,6 +55,7 @@ private playerTextures: PIXI.Texture[] = [];
         this.logo.on('pointerdown', () => this.onClick());
     }
 
+    // Switches url location 
     onClick() {
         console.log('click');
         window.location.href = "game.html";

@@ -21,11 +21,14 @@ export class BirdTwo extends PIXI.Sprite {
     }
 
     update() {
+        // Creating speed 
         this.x -= 2
+        // If 'x' has a certain position, send bird beginning position 
         if (this.x < -200) {
             this.x = 1000
         }
-
+        
+        // Swapping textures
         if(this.x % 40 == 0){
             this.texture = this.textureTwo;
         }else if(this.x % 20 == 0){

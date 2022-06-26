@@ -90,11 +90,12 @@ update(delta: number){
 
         this.enemyrtwo.update()
 
+        // Collision detection throughout console log
         if(this.collision(this.enemy, this.player)){
             console.log("Player touches bird")
         }
     }
-
+    
     collision(sprite1:PIXI.Sprite, sprite2:PIXI.Sprite) {
         const bounds1 = sprite1.getBounds()
         const bounds2 = sprite2.getBounds()
