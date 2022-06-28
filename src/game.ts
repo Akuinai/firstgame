@@ -55,7 +55,7 @@ export class Game {
 
         // Loading and playing music
         let playMusic = this.loader.resources["menuMusic"].data!
-        // playMusic.play()
+        playMusic.play()
 
         // Adding & loading player
         this.player = new Player(this.loader.resources["playerTexture"].texture!);
